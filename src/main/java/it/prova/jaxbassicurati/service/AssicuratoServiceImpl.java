@@ -38,4 +38,10 @@ public class AssicuratoServiceImpl implements AssicuratoService {
         repository.delete(assicuratoInstance);
 
     }
+
+    @Override
+    public Assicurato findByCodiceFiscale(String codiceFiscale) {
+        return repository.findByCodiceFiscale(codiceFiscale);
+    }
+
 }

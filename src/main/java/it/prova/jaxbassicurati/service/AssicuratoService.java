@@ -16,5 +16,7 @@ public interface AssicuratoService {
 
     void rimuovi(Assicurato assicuratoInstance);
 
+    Assicurato findByCodiceFiscale(String codiceFiscale);
+
 
 }

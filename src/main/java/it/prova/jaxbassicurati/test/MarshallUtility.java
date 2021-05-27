@@ -21,7 +21,7 @@ public class MarshallUtility {
 
     }
 
-    public static void  marshallProcessed(Assicurati assicurati) throws JAXBException {
+    public static void marshallProcessed(Assicurati assicurati) throws JAXBException {
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Assicurati.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -36,7 +36,7 @@ public class MarshallUtility {
 
     }
 
-    public static void  marshallScarti(Assicurati assicurati) throws JAXBException {
+    public static void marshallScarti(Assicurati assicurati) throws JAXBException {
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Assicurati.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -51,13 +51,22 @@ public class MarshallUtility {
 
     }
 
-    public static Assicurato fromMarshallToMOdel(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall){
-        Assicurato assicuratoModel=new Assicurato();
+    public static Assicurato fromMarshallToModel(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall) {
+        Assicurato assicuratoModel = new Assicurato();
         assicuratoModel.setCodiceFiscale(assicuratoMarshall.getCodicefiscale());
         assicuratoModel.setNome(assicuratoMarshall.getNome());
         assicuratoModel.setCognome(assicuratoMarshall.getCognome());
         assicuratoModel.setDataNascita(assicuratoMarshall.getDatanascita().toGregorianCalendar().getTime());
         assicuratoModel.setNumeroSinistri((int) assicuratoMarshall.getNuovisinistri());
 
+        return assicuratoModel;
+
+    }
+
+    public static boolean validate(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall) {
+        if (assicuratoMarshall.getNuovisinistri() > 10) {
+            return false;
+        }
+        return true;
     }
 }
