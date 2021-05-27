@@ -24,8 +24,7 @@ public class Assicurato {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank(message = "{codicefiscale.notblank}")
+//    @NotBlank(message = "{codicefiscale.notblank}")
     @Column(name = "codice_fiscale")
     private String codiceFiscale;
 
