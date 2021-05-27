@@ -1,5 +1,7 @@
 package it.prova.jaxbassicurati.model;
 
+import it.prova.jaxbassicurati.dto.AssicuratiDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,4 +29,6 @@ public class Assicurati {
                 "assicurato=" + assicurato +
                 '}';
     }
+
+
 }

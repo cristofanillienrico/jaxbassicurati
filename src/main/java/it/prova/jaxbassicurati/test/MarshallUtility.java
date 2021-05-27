@@ -1,6 +1,7 @@
 package it.prova.jaxbassicurati.test;
 
 import it.prova.jaxbassicurati.flusso.marshall.Assicurati;
+import it.prova.jaxbassicurati.model.Assicurato;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -47,6 +48,16 @@ public class MarshallUtility {
 
         //Marshal the employees list in file
         jaxbMarshaller.marshal(assicurati, new File("src/scarti/scarti.xml"));
+
+    }
+
+    public static Assicurato fromMarshallToMOdel(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall){
+        Assicurato assicuratoModel=new Assicurato();
+        assicuratoModel.setCodiceFiscale(assicuratoMarshall.getCodicefiscale());
+        assicuratoModel.setNome(assicuratoMarshall.getNome());
+        assicuratoModel.setCognome(assicuratoMarshall.getCognome());
+        assicuratoModel.setDataNascita(assicuratoMarshall.getDatanascita().toGregorianCalendar().getTime());
+        assicuratoModel.setNumeroSinistri((int) assicuratoMarshall.getNuovisinistri());
 
     }
 }

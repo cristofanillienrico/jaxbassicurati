@@ -1,11 +1,16 @@
 package it.prova.jaxbassicurati.web.api;
 
 
+import it.prova.jaxbassicurati.flusso.marshall.Assicurati;
+import it.prova.jaxbassicurati.flusso.marshall.Assicurato;
 import it.prova.jaxbassicurati.service.AssicuratoService;
+import it.prova.jaxbassicurati.test.MarshallUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.xml.bind.JAXBException;
 
 @RestController
 @RequestMapping("api/assicurato")
@@ -15,7 +20,11 @@ public class AssicuratoController {
     private AssicuratoService assicuratoService;
 
     @GetMapping
-    public void trigger() {
-        return registaService.listAllElements();
+    public void trigger() throws JAXBException {
+        Assicurati assicurati=MarshallUtility.unmarshall();
+
+        for(Assicurato assicurato:assicurati.getAssicurato()){
+            it.prova.jaxbassicurati.model.Assicurato assicuratoModel=
+        }
     }
 }

@@ -34,5 +34,8 @@ public class AssicuratiDTO {
         return new AssicuratiDTO(assicuratiModel.getAssicurato());
     }
 
+   
+
+
 
 }
