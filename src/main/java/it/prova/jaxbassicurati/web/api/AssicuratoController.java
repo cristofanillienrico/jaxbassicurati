@@ -4,7 +4,7 @@ package it.prova.jaxbassicurati.web.api;
 import it.prova.jaxbassicurati.flusso.marshall.Assicurati;
 import it.prova.jaxbassicurati.flusso.marshall.Assicurato;
 import it.prova.jaxbassicurati.service.AssicuratoService;
-import it.prova.jaxbassicurati.test.MarshallUtility;
+import it.prova.jaxbassicurati.service.MarshallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +20,9 @@ public class AssicuratoController {
     @Autowired
     private AssicuratoService assicuratoService;
 
+    @Autowired
+    private MarshallService marshallService;
+
     @GetMapping
     public ResponseEntity<String> trigger() throws JAXBException {
 
@@ -27,12 +30,12 @@ public class AssicuratoController {
 
         Assicurati assicuratiScarti = new Assicurati();
 
-        Assicurati assicurati = MarshallUtility.unmarshall();
+        Assicurati assicurati = marshallService.unmarshall();
 
         for (Assicurato assicurato : assicurati.getAssicurato()) {
 
             //faccio tutti i controlli di validità
-            if (!MarshallUtility.validate(assicurato)) {
+            if (!marshallService.validate(assicurato)) {
                 assicuratiScarti.getAssicurato().add(assicurato);
                 continue;
             }
@@ -43,7 +46,7 @@ public class AssicuratoController {
             //se non esiste lo inserisco nel db e lo aggiungo alla lista dei processati
             if (assicuratoInCanna == null) {
 
-                it.prova.jaxbassicurati.model.Assicurato assicuratoModel = MarshallUtility.fromMarshallToModel(assicurato);
+                it.prova.jaxbassicurati.model.Assicurato assicuratoModel = marshallService.fromMarshallToModel(assicurato);
                 assicuratoService.inserisciNuovo(assicuratoModel);
                 assicuratiProcessed.getAssicurato().add(assicurato);
 
@@ -60,8 +63,8 @@ public class AssicuratoController {
 
         }
 
-        MarshallUtility.marshallScarti(assicuratiScarti);
-        MarshallUtility.marshallProcessed(assicuratiProcessed);
+        marshallService.marshallScarti(assicuratiScarti);
+        marshallService.marshallProcessed(assicuratiProcessed);
 
         return ResponseEntity.ok("Operazione Effettuata");
     }

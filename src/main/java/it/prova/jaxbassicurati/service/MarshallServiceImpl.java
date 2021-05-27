@@ -1,7 +1,8 @@
-package it.prova.jaxbassicurati.test;
+package it.prova.jaxbassicurati.service;
 
 import it.prova.jaxbassicurati.flusso.marshall.Assicurati;
 import it.prova.jaxbassicurati.model.Assicurato;
+import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -9,20 +10,21 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
-public class MarshallUtility {
+@Service
+public class MarshallServiceImpl implements MarshallService {
 
-    public static Assicurati unmarshall() throws JAXBException {
 
+    @Override
+    public Assicurati unmarshall() throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Assicurati.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
         //We had written this file in marshalling example
         return (Assicurati) jaxbUnmarshaller.unmarshal(new File("src/input/assicurati.xml"));
-
     }
 
-    public static void marshallProcessed(Assicurati assicurati) throws JAXBException {
-
+    @Override
+    public void marshallProcessed(Assicurati assicurati) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Assicurati.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -36,8 +38,8 @@ public class MarshallUtility {
 
     }
 
-    public static void marshallScarti(Assicurati assicurati) throws JAXBException {
-
+    @Override
+    public void marshallScarti(Assicurati assicurati) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Assicurati.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -51,7 +53,8 @@ public class MarshallUtility {
 
     }
 
-    public static Assicurato fromMarshallToModel(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall) {
+    @Override
+    public Assicurato fromMarshallToModel(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall) {
         Assicurato assicuratoModel = new Assicurato();
         assicuratoModel.setCodiceFiscale(assicuratoMarshall.getCodicefiscale());
         assicuratoModel.setNome(assicuratoMarshall.getNome());
@@ -60,10 +63,10 @@ public class MarshallUtility {
         assicuratoModel.setNumeroSinistri((int) assicuratoMarshall.getNuovisinistri());
 
         return assicuratoModel;
-
     }
 
-    public static boolean validate(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall) {
+    @Override
+    public boolean validate(it.prova.jaxbassicurati.flusso.marshall.Assicurato assicuratoMarshall) {
         if (assicuratoMarshall.getNuovisinistri() > 10) {
             return false;
         }
