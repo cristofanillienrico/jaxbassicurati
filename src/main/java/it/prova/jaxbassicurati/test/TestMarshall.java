@@ -46,7 +46,7 @@ public class TestMarshall {
         jaxbMarshaller.marshal(assicurati, System.out);
 
         //Marshal the employees list in file
-        jaxbMarshaller.marshal(assicurati, new File("src/processed/processed.xml"));
+        jaxbMarshaller.marshal(assicurati, new File("src/processed/ciao.xml"));
     }
 
 
