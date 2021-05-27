@@ -18,7 +18,7 @@ public class TestUnmarshal {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
         //We had written this file in marshalling example
-        Assicurati assicurati = (Assicurati) jaxbUnmarshaller.unmarshal(new File("c:/Users/assicurati.xml"));
+        Assicurati assicurati = (Assicurati) jaxbUnmarshaller.unmarshal(new File("src/input/assicurati.xml"));
 
         System.out.println(assicurati.getAssicurato().get(1).getNome());
 
