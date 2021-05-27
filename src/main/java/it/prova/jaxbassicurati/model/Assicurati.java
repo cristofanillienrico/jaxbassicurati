@@ -9,6 +9,10 @@ public class Assicurati {
     public Assicurati() {
     }
 
+    public Assicurati(List<Assicurato> assicurato) {
+        this.assicurato = assicurato;
+    }
+
     public List<Assicurato> getAssicurato() {
         return assicurato;
     }

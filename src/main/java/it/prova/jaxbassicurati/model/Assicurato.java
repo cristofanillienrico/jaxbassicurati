@@ -48,6 +48,14 @@ public class Assicurato {
     public Assicurato() {
     }
 
+    public Assicurato(String codiceFiscale, String nome, String cognome, Date dataNascita, Integer numeroSinistri) {
+        this.codiceFiscale = codiceFiscale;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataNascita = dataNascita;
+        this.numeroSinistri = numeroSinistri;
+    }
+
     public String getCodiceFiscale() {
         return codiceFiscale;
     }
